@@ -16,12 +16,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+
+    nixpkgs-ruby.url = "github:bobvanderlinden/nixpkgs-ruby";
   };
 
-  outputs = { self, nixpkgs, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-ruby, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      overlays = [
+        nixpkgs-ruby.overlays.default
+      ];
     in
     {
 
@@ -33,11 +39,25 @@
             ./hosts/snowpenguin/configuration.nix
             ./hosts/snowpenguin/hardware-configuration.nix
             ./modules/nixos/flatpak.nix
+	    ./modules/nixos/nvidia.nix
             ./modules/nixos/hardening.nix
+            ./modules/nixos/tlp.nix
             inputs.nix-flatpak.nixosModules.nix-flatpak
             inputs.home-manager.nixosModules.default
           ];
         };
+
+      devShells.x86_64-linux.python = pkgs.mkShell {
+           nativeBuildInputs = with pkgs; [
+              python3
+           ];
+
+	   shellHook = ''
+              echo "Welcome to my Python devshell"
+              echo "This a a cow, not a snake!" | ${pkgs.lolcat}/bin/lolcat
+           '';
+      };
+
 
     };
 }

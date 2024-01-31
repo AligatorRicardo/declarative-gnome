@@ -15,14 +15,15 @@
   home.stateVersion = "23.11";
 
   # The home.packages option allows you to install Nix packages into your environment.
-  home.packages = with pkgs; [
-    lf
-    kitty
-    activitywatch
-    aw-server-rust
-    gh
-    github-desktop
-  ];
+  home.packages = [
+    pkgs.lf
+    pkgs.kitty
+    pkgs.activitywatch
+    pkgs.aw-server-rust
+    pkgs.gh
+    pkgs.github-desktop
+    pkgs.distrobox
+   ];
 
   # This is the primary way to manage plain files with the through 'home.file'.
   home.file = {
@@ -31,9 +32,10 @@
   # Home Manager can also manage your environment variables through'home.sessionVariables'.
   home.sessionVariables = {
     EDITOR = "nvim";
+    NIXOS_OZONE_WL=1;
     QT_QPA_PLATFORM = "wayland"; 
     QT_QPA_PLATFORMTHEME = "qt5ct";
-  };
+  };  
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

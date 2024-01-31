@@ -36,6 +36,7 @@ dconf.settings = {
         "caffeine@patapon.info" 
         "gmind@tungstnballon.gitlab.com"
         "appindicatorsupport@rgcjonas.gmail.com"
+	"batterytime@typeof.pw"
        ];
 
     };
@@ -51,7 +52,7 @@ dconf.settings = {
     "org/gnome/shell/extensions/user-theme" = {
         name = "Catppuccin-Mocha-Standard-Mauve-Dark";
     };
- 
+
 };
 
     home.packages = with pkgs; [
@@ -65,6 +66,7 @@ dconf.settings = {
       gnomeExtensions.gamemode-indicator-in-system-settings
       gnomeExtensions.appindicator
       gnomeExtensions.user-themes
+      gnomeExtensions.battery-time-2
       gnome.gnome-tweaks
     ];
 

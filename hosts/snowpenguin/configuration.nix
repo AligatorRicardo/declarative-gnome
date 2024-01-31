@@ -1,8 +1,6 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+# Edit this configuration file to define what should be installed on your system. 
 
-{ config, pkgs, inputs, ... }:
+{ config, nixpkgs-ruby, pkgs, inputs, ... }:
 
  let acermodule = config.boot.kernelPackages.callPackage ./acer-rgb.nix {}; in
 
@@ -12,35 +10,36 @@
        inputs.home-manager.nixosModules.default
     ];
 
-  # Bootloader.
+  # Bootloader and Plymouth.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.initrd.systemd.enable = true;
+  boot.plymouth.enable = true;
 
-  boot.initrd.luks.devices."luks-1bfe9204-0193-48e4-ae5a-6da1fef06f52".device = "/dev/disk/by-uuid/1bfe9204-0193-48e4-ae5a-6da1fef06f52";
+  boot.initrd.luks.devices."luks-1bfe9204-0193-48e4-ae5a-6da1fef06f52".device = "/dev/disk/by-uuid/1bfe9204-0193-48e4-ae5a-6da1fef06f52"; # Encrypts my hardrive
   networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
-  networking.networkmanager.enable = true;
- 
+  networking.networkmanager = {
+     enable = true;
+  };
+
   # Enable Flakes
   nix.settings.experimental-features = [ "flakes" "nix-command" ];
 
   # Set your time zone.
   time.timeZone = "America/Fortaleza";
 
+  # Enables Hardware Firmware to fix some minor bugs
   hardware.enableAllFirmware = true;
 
+  # Enables my Acer RGB Keyboard to work properly, and removes boot logs.
   boot.extraModulePackages = [ acermodule ];
   boot.kernelModules = [ "facer" "wmi" "sparse-keymap" "video" ];
+  boot.kernelParams = [ "quiet" "udev.log_level=3" "acpi_backlight=video" "acpi_osi=Linux" ];
 
   # Select internationalisation properties.
   i18n.defaultLocale = "pt_BR.UTF-8";
-
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "pt_BR.UTF-8";
     LC_IDENTIFICATION = "pt_BR.UTF-8";
@@ -53,7 +52,7 @@
     LC_TIME = "pt_BR.UTF-8";
   };
 
-  # Enable the X11 windowing system.
+  # Enable the X11 windowing system and removes Xterm from it.
   services.xserver = {
     enable = true;
     excludePackages = [ pkgs.xterm ];
@@ -63,7 +62,7 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
-  # Delete all bloatware that GNOME ships by default
+  # Delete all bloatware that GNOME ships by default ( A lot of stuff, lol)
   environment.gnome.excludePackages = (with pkgs; [
   gnome-photos
   gnome-tour
@@ -111,12 +110,10 @@
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
+  # Enables ZSH
   programs.zsh.enable = true;
  
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define a user account with ZSH as default shell. Don't forget to set a password
   users.users.theloremaster = {
     isNormalUser = true;
     description = "Loremaster";
@@ -135,36 +132,42 @@
     };
   };
 
+  # Enables GSConnect
   programs.kdeconnect = {
     enable = true;
     package = pkgs.gnomeExtensions.gsconnect;
   };
+
+  # Enables Wayland electron support
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
  
+  # Sets up Kitty as default terminal
+  environment.sessionVariables.TERMINAL = "kitty";
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-  ];
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
+  # Disables the firewall altogether.
   networking.firewall.enable = false;
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.11"; # Did you read the comment?
+  # Enables NextDNS
+  services.resolved = {
+       enable = true;
+       extraConfig = "
+         DNS=45.90.28.0#968e21.dns.nextdns.io
+         DNS=2a07:a8c0::#968e21.dns.nextdns.io
+         DNS=45.90.30.0#968e21.dns.nextdns.io
+         DNS=2a07:a8c1::#968e21.dns.nextdns.io
+         DNSOverTLS=yes
+         DNSSEC=false
+       ";
+  };
+
+  # This value determines the NixOS release when it was installed.
+  # Do not change this under no circunstance wittout reading the news.
+  system.stateVersion = "23.11";
 
 }

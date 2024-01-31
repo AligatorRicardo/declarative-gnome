@@ -14,7 +14,6 @@
        "org.onlyoffice.desktopeditors"
        "io.github.spacingbat3.webcord"
        "com.spotify.Client"
-       "com.quexten.Goldwarden"
        "md.obsidian.Obsidian"
        "io.github.celluloid_player.Celluloid"
        { appId = "org.gimp.GIMP"; origin = "flathub-beta";  }
@@ -32,11 +31,14 @@
        "hu.kramo.Cartridges"
        { appId = "moe.launcher.an-anime-game-launcher"; origin = "launcher.moe";  }
        "com.github.tchx84.Flatseal"
+       "com.vysp3r.ProtonPlus"
+       "org.upscayl.Upscayl"
      ];
      overrides = {
         
 	global = {
            Context.sockets = ["wayland" "!x11" "!fallback-x11"];
+	   
 
 	   Environment = {
 	   GTK_THEME = "Catppuccin-Mocha-Standard-Mauve-Dark";
@@ -46,17 +48,17 @@
 	   Context.filesystems = [
            "/home/theloremaster/.themes"
 	   "/home/theloremaster/.icons"
+	   "/home/theloremaster/GamingSpace/Pokémon\ Essentials/"
 	   ];
 
 	};
 
-        "org.onlyoffice.desktopeditors".Context.sockets = ["x11"];        
-        "com.spotify.Client".Context.sockets = ["x11"];
+        "org.onlyoffice.desktopeditors".Context.sockets = ["x11"];          "com.spotify.Client".Context.sockets = ["x11"];
 	"com.valvesoftware.Steam".Context.sockets = ["x11"];
         "net.lutris.Lutris".Context.sockets = ["x11"];
 	"org.prismlauncher.PrismLauncher".Context.sockets = ["x11"];
 	"com.heroicgameslauncher.hgl".Context.sockets = ["x11"];
-	"com.usebottles.bottles".Context.sockets = ["x11"];         
+	"com.usebottles.bottles".Context.sockets = ["x11"];        
      };
  };
 

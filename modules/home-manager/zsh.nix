@@ -14,11 +14,6 @@
        syntaxHighlighting.enable = true;
        dotDir = ".config/zsh";
        
-       shellAliases = {
-          nixos-update = "sudo nixos-rebuild switch && home-manager build switch";
-          lf = "ranger";
-       };
-
       localVariables = { 
        ZSH_DISABLE_COMPFIX = "true"; # Fixes Distrobox/VSCodium wrong shell warning
       };

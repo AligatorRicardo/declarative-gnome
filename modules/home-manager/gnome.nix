@@ -53,6 +53,10 @@ dconf.settings = {
         name = "Catppuccin-Mocha-Standard-Mauve-Dark";
     };
 
+    "org/gnome/desktop/peripherals/touchpad" = {
+       tap-to-click = true;
+    };
+
 };
 
     home.packages = with pkgs; [

@@ -16,14 +16,15 @@
 
   # The home.packages option allows you to install Nix packages into your environment.
   home.packages = [
-    pkgs.lf
-    pkgs.kitty
-    pkgs.activitywatch
-    pkgs.aw-server-rust
-    pkgs.gh
-    pkgs.github-desktop
-    pkgs.distrobox
-   ];
+     pkgs.lf
+     pkgs.kitty
+     pkgs.activitywatch
+     pkgs.aw-server-rust
+     pkgs.gh
+     pkgs.github-desktop
+     pkgs.distrobox
+  ];
+
 
   # This is the primary way to manage plain files with the through 'home.file'.
   home.file = {

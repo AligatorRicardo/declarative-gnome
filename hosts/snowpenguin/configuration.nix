@@ -120,6 +120,7 @@
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.zsh;
     packages = with pkgs; [
+    squashfsTools
     ];
   };
 

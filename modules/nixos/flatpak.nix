@@ -33,6 +33,8 @@
        "com.github.tchx84.Flatseal"
        "com.vysp3r.ProtonPlus"
        "org.upscayl.Upscayl"
+       "org.gnome.Boxes"
+       "com.pokemmo.PokeMMO"
      ];
      overrides = {
         

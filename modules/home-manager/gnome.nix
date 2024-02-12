@@ -67,7 +67,6 @@ dconf.settings = {
       #gsconnect (Already installed in system)
       gnomeExtensions.caffeine
       gnomeExtensions.clipboard-indicator
-      gnomeExtensions.gamemode-indicator-in-system-settings
       gnomeExtensions.appindicator
       gnomeExtensions.user-themes
       gnomeExtensions.battery-time-2

@@ -18,21 +18,23 @@
 
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
 
-    nixpkgs-ruby.url = "github:bobvanderlinden/nixpkgs-ruby";
+    nix-on-droid = {
+      url = "github:nix-community/nix-on-droid/release-23.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
+
   };
 
-  outputs = { self, nixpkgs, nixpkgs-ruby, ... }@inputs:
+  outputs = { self, nixpkgs, nix-on-droid, ... }@ inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-      overlays = [
-        nixpkgs-ruby.overlays.default
-      ];
     in
     {
 
-      homeManagerModules.snowpenguin = ./modules/home-manager/snowpenguin.nix;
-    
+      # Configuration for the Snowpenguin setup
+      homeManagerModules.snowpenguin = ./modules/home-manager/snowpenguin.nix; 
       nixosConfigurations.snowpenguin = nixpkgs.lib.nixosSystem {
           specialArgs = {inherit inputs;};
           modules = [ 
@@ -46,6 +48,16 @@
             inputs.home-manager.nixosModules.default
           ];
         };
+
+      # Configuration for the Nix-on-droid setup
+      homeManagerModules.nix-on-droid = ./modules/home-manager/nix-on-droid.nix; 
+      nixOnDroidConfigurations.nix-on-droid = nix-on-droid.lib.nixOnDroidConfiguration {
+          specialArgs = {inherit inputs;};
+          modules = [ 
+            ./hosts/nix-on-droid/configuration.nix
+            inputs.home-manager.nixosModules.default
+          ];
+      };
 
       devShells.x86_64-linux.python = pkgs.mkShell {
            nativeBuildInputs = with pkgs; [

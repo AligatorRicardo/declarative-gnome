@@ -12,7 +12,6 @@
      ./zsh.nix
      ./git.nix
      # Importing Home Manager modules from Flakes 
-     inputs.nixvim.homeManagerModules.nixvim
   ];
 
 }

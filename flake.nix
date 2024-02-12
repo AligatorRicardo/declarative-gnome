@@ -52,7 +52,7 @@
       # Configuration for the Nix-on-droid setup
       homeManagerModules.nix-on-droid = ./modules/home-manager/nix-on-droid.nix; 
       nixOnDroidConfigurations.nix-on-droid = nix-on-droid.lib.nixOnDroidConfiguration {
-          specialArgs = {inherit inputs;};
+          extraSpecialArgs = {inherit inputs;};
           modules = [ 
             ./hosts/nix-on-droid/configuration.nix
             inputs.home-manager.nixosModules.default

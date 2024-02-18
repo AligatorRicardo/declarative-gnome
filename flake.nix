@@ -9,7 +9,7 @@
        inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-flatpak.url = "github:Tomaszal/nix-flatpak/feature/overrides";
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
 
     nixvim = {
       url = "github:nix-community/nixvim/nixos-23.11";

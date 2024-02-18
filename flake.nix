@@ -43,15 +43,17 @@
           ];
         };
 
-      # Python devshell
-      devShells.x86_64-linux.python = pkgs.mkShell {
+      # Rust devshell
+      devShells.x86_64-linux.rust = pkgs.mkShell {
            nativeBuildInputs = with pkgs; [
-              python3
+              rustc
+	      rustup
            ];
 
 	   shellHook = ''
-              echo "Welcome to my Python devshell"
+              echo "Welcome to the Rust Devshell"
            '';
+
       };
 
    };

@@ -11,7 +11,7 @@
      ./lf.nix
      ./zsh.nix
      ./git.nix
-     # Importing Home Manager modules from Flakes 
+     # Importing Home Manager modules from Flakes
   ];
 
 }

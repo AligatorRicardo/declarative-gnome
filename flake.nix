@@ -16,20 +16,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
-
-    nix-on-droid = {
-      url = "github:nix-community/nix-on-droid/release-23.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-    };
-
   };
 
   outputs = { self, nixpkgs, nix-on-droid, ... }@ inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      extensions = inputs.nix-vscode-extensions.extensions.${system};
     in
     {
 
@@ -44,21 +37,13 @@
 	    ./modules/nixos/nvidia.nix
             ./modules/nixos/hardening.nix
             ./modules/nixos/tlp.nix
+	    ./modules/nixos/syncthing.nix
             inputs.nix-flatpak.nixosModules.nix-flatpak
-            inputs.home-manager.nixosModules.default
+	    inputs.home-manager.nixosModules.default
           ];
         };
 
-      # Configuration for the Nix-on-droid setup
-      homeManagerModules.nix-on-droid = ./modules/home-manager/nix-on-droid.nix; 
-      nixOnDroidConfigurations.nix-on-droid = nix-on-droid.lib.nixOnDroidConfiguration {
-          extraSpecialArgs = {inherit inputs;};
-          modules = [ 
-            ./hosts/nix-on-droid/configuration.nix
-            inputs.home-manager.nixosModules.default
-          ];
-      };
-
+      # Python devshell
       devShells.x86_64-linux.python = pkgs.mkShell {
            nativeBuildInputs = with pkgs; [
               python3
@@ -66,10 +51,8 @@
 
 	   shellHook = ''
               echo "Welcome to my Python devshell"
-              echo "This a a cow, not a snake!" | ${pkgs.lolcat}/bin/lolcat
            '';
       };
 
-
-    };
+   };
 }

@@ -1,4 +1,13 @@
 { pkgs, config, ...}:
+
+
+let
+  wallpaper = builtins.fetchurl {
+    url = "https://raw.githubusercontent.com/AligatorRicardo/personal-wallpapers/main/catppuccin/mocha-hald1_upscayl.png";
+    sha256 = "1qq6ykvwym9kl2a86j69vx8pw8nx9bd454j6q57n9lnskgap96sv";
+  };
+in
+
 {
 
 dconf.settings = {
@@ -55,6 +64,10 @@ dconf.settings = {
 
     "org/gnome/desktop/peripherals/touchpad" = {
        tap-to-click = true;
+    };
+
+    "org/gnome/desktop/background" = {
+      picture-uri-dark = wallpaper;
     };
 
 };

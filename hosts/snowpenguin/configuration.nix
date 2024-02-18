@@ -17,7 +17,7 @@
   boot.plymouth.enable = true;
 
   boot.initrd.luks.devices."luks-1bfe9204-0193-48e4-ae5a-6da1fef06f52".device = "/dev/disk/by-uuid/1bfe9204-0193-48e4-ae5a-6da1fef06f52"; # Encrypts my hardrive
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "snowpenguin"; # Define your hostname.
 
   # Enable networking
   networking.networkmanager = {

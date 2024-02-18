@@ -7,7 +7,7 @@ stdenv.mkDerivation rec {
     owner = "JafarAkhondali";
     repo = "acer-predator-turbo-and-rgb-keyboard-linux-module";
     rev = "${version}";
-    sha256 = "za8dbO5ZBaqdwohTgstyC3jbqOxLIq8bJuy0ASHWYew=";
+    sha256 = "sha256-M364pRfEhEYMcnC6+HvJWddJ01DkabbbbtTJVKYHTBI=";
   };
 
    setSourceRoot = ''

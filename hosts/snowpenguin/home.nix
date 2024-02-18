@@ -4,6 +4,7 @@
  
   imports = [
   inputs.self.outputs.homeManagerModules.snowpenguin
+
   ];
 
   # Home Manager needs a bit of information about you and the paths it should manage.
@@ -24,7 +25,6 @@
      pkgs.github-desktop
      pkgs.distrobox
   ];
-
 
   # This is the primary way to manage plain files with the through 'home.file'.
   home.file = {

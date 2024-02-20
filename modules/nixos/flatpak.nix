@@ -7,7 +7,6 @@
      remotes = [
        { name = "flathub"; location = "https://flathub.org/repo/flathub.flatpakrepo"; }
        { name = "flathub-beta"; location = "https://flathub.org/beta-repo/flathub-beta.flatpakrepo"; }
-       { name = "launcher.moe"; location = "https://gol.launcher.moe/gol.launcher.moe.flatpakrepo"; }
      ];
      packages = [
        "io.gitlab.librewolf-community"
@@ -29,7 +28,6 @@
        "com.usebottles.bottles"
        "org.prismlauncher.PrismLauncher"
        "hu.kramo.Cartridges"
-       { appId = "moe.launcher.an-anime-game-launcher"; origin = "launcher.moe";  }
        "com.github.tchx84.Flatseal"
        "com.vysp3r.ProtonPlus"
        "org.upscayl.Upscayl"

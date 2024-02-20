@@ -1,6 +1,6 @@
 # Edit this configuration file to define what should be installed on your system. 
 
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, catppuccinifier, ... }:
 
  let acermodule = config.boot.kernelPackages.callPackage ./acer-rgb.nix {}; in
 
@@ -127,7 +127,7 @@
   # Enables Home-Manager for the "theloremaster" user
   home-manager = {
     # also pass inputs to home-manager modules
-    extraSpecialArgs = {inherit inputs;};
+    extraSpecialArgs = {inherit inputs catppuccinifier;};
     users = {
     "theloremaster" = import ./home.nix;
     };

@@ -1,4 +1,4 @@
-{ config, inputs, pkgs, ... }:
+{ config, inputs, nix-vscode-extensions, pkgs, catppuccinifier, ... }:
 
 {
  
@@ -23,6 +23,7 @@
      pkgs.gh
      pkgs.github-desktop
      pkgs.distrobox
+     catppuccinifier.packages.${pkgs.system}.cli
   ];
 
   # This is the primary way to manage plain files with the through 'home.file'.

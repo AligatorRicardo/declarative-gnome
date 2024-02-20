@@ -19,9 +19,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    catppuccinifier = {
+       url = "github:lighttigerXIV/catppuccinifier";
+       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
-  outputs = { self, nixpkgs, nix-vscode-extensions, ... }@ inputs:
+  outputs = { self, nixpkgs, nix-vscode-extensions, catppuccinifier, ... }@ inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -32,7 +37,7 @@
       # Configuration for the Snowpenguin setup
       homeManagerModules.snowpenguin = ./modules/home-manager/snowpenguin.nix; 
       nixosConfigurations.snowpenguin = nixpkgs.lib.nixosSystem {
-          specialArgs = {inherit inputs;};
+          specialArgs = {inherit inputs nix-vscode-extensions catppuccinifier;};
           modules = [ 
             ./hosts/snowpenguin/configuration.nix
             ./hosts/snowpenguin/hardware-configuration.nix

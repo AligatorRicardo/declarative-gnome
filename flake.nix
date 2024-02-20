@@ -9,7 +9,10 @@
        inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-flatpak.url = "github:gmodena/nix-flatpak";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/main";
+
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    flake-utils.follows = "nix-vscode-extensions/flake-utils"; 
 
     nixvim = {
       url = "github:nix-community/nixvim/nixos-23.11";
@@ -18,7 +21,7 @@
 
   };
 
-  outputs = { self, nixpkgs, ... }@ inputs:
+  outputs = { self, nixpkgs, nix-vscode-extensions, ... }@ inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};

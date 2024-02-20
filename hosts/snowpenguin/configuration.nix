@@ -1,6 +1,6 @@
 # Edit this configuration file to define what should be installed on your system. 
 
-{ config, nixpkgs-ruby, pkgs, inputs, ... }:
+{ config, pkgs, inputs, ... }:
 
  let acermodule = config.boot.kernelPackages.callPackage ./acer-rgb.nix {}; in
 

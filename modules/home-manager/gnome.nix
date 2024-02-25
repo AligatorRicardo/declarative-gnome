@@ -14,6 +14,7 @@ dconf.settings = {
     "org/gnome/shell" = {
        favorite-apps = [
          "io.gitlab.librewolf-community.desktop"
+	 "vivaldi-stable.desktop"
          "org.gnome.Nautilus.desktop"
          "kitty.desktop"
 	 "de.haeckerfelix.Fragments.desktop"

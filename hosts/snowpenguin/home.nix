@@ -1,4 +1,4 @@
-{ config, inputs, nix-vscode-extensions, pkgs, catppuccinifier, ... }:
+{ config, inputs, pkgs, catppuccinifier, ... }:
 
 {
  
@@ -14,6 +14,8 @@
   # compatible with. You should not change this value, even after updating
   home.stateVersion = "23.11";
 
+  nixpkgs.config =  { allowUnfree = true; };
+
   # The home.packages option allows you to install Nix packages into your environment.
   home.packages = [
      pkgs.lf
@@ -24,6 +26,12 @@
      pkgs.github-desktop
      pkgs.distrobox
      catppuccinifier.packages.${pkgs.system}.cli
+     (pkgs.vivaldi.override {
+      proprietaryCodecs = true;
+      enableWidevine = false;
+    })
+    pkgs.vivaldi-ffmpeg-codecs
+    pkgs.widevine-cdm
   ];
 
   # This is the primary way to manage plain files with the through 'home.file'.

@@ -6,7 +6,6 @@
      ./gnome.nix
      ./kitty.nix
      ./theming.nix
-     ./vscodium.nix
      # TUI Apps and their configurations
      ./neovim.nix
      ./lf.nix

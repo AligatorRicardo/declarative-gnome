@@ -11,9 +11,6 @@
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/main";
 
-    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
-    flake-utils.follows = "nix-vscode-extensions/flake-utils"; 
-
     nixvim = {
       url = "github:nix-community/nixvim/nixos-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -26,18 +23,17 @@
 
   };
 
-  outputs = { self, nixpkgs, nix-vscode-extensions, catppuccinifier, ... }@ inputs:
+  outputs = { self, nixpkgs, catppuccinifier, ... }@ inputs:
     let
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-      extensions = inputs.nix-vscode-extensions.extensions.${system};
+      #pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = import nixpkgs { system = "x86_64-linux"; config.allowUnfree = true; };
     in
     {
-
       # Configuration for the Snowpenguin setup
       homeManagerModules.snowpenguin = ./modules/home-manager/snowpenguin.nix; 
       nixosConfigurations.snowpenguin = nixpkgs.lib.nixosSystem {
-          specialArgs = {inherit inputs nix-vscode-extensions catppuccinifier;};
+          specialArgs = {inherit inputs catppuccinifier;};
           modules = [ 
             ./hosts/snowpenguin/configuration.nix
             ./hosts/snowpenguin/hardware-configuration.nix
@@ -53,7 +49,7 @@
 
       # Rust devshell
       devShells.x86_64-linux.rust = pkgs.mkShell {
-           nativeBuildInputs = with pkgs; [
+	   nativeBuildInputs = with pkgs; [
               rustc
 	      rustup
            ];
@@ -61,8 +57,37 @@
 	   shellHook = ''
               echo "Welcome to the Rust Devshell"
            '';
-
       };
 
-   };
+      # Fullstack devshell
+      devShells.x86_64-linux.fullstack = pkgs.mkShell {
+	   nativeBuildInputs = with pkgs; [
+              # Node + Javascript
+	      nodejs
+	      electron_28
+	      # Java
+	      openjdk19
+	      jetbrains.idea-community
+           ];
+           
+           shellHook = ''
+              echo "Welcome to the Fullstack Devshell"
+           '';
+      };
+
+
+      # Android devshell
+      devShells.x86_64-linux.android = pkgs.mkShell {
+	   nativeBuildInputs = with pkgs; [
+	      android-tools
+	      android-studio
+	      scrcpy
+	      kotlin
+           ];
+           
+	   shellHook = ''
+               echo "Welcome to the Android Devshell"
+           '';
+      };
+};
 }

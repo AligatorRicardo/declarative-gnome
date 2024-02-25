@@ -2,16 +2,16 @@
 {
 
   imports = [
-     # GUI Apps and their configurations
-     ./gnome.nix
-     ./kitty.nix
-     ./theming.nix
-     # TUI Apps and their configurations
-     ./neovim.nix
-     ./lf.nix
-     ./zsh.nix
-     ./git.nix
-     # Importing Home Manager modules from Flakes
+     # Desktop configurations
+     ./desktop/gnome.nix
+     ./desktop/theming.nix
+     # Apps and their configurations
+     ./apps/neovim.nix
+     ./apps/lf.nix
+     ./apps/kitty.nix
+     # Shell and it's configuration
+     ./shell/zsh.nix
+     ./shell/git.nix
   ];
 
 }

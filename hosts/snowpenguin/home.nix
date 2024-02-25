@@ -30,8 +30,8 @@
       proprietaryCodecs = true;
       enableWidevine = false;
     })
-    pkgs.vivaldi-ffmpeg-codecs
-    pkgs.widevine-cdm
+     pkgs.vivaldi-ffmpeg-codecs
+     pkgs.widevine-cdm
   ];
 
   # This is the primary way to manage plain files with the through 'home.file'.

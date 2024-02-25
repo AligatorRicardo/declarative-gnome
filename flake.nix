@@ -37,11 +37,11 @@
           modules = [ 
             ./hosts/snowpenguin/configuration.nix
             ./hosts/snowpenguin/hardware-configuration.nix
-            ./modules/nixos/flatpak.nix
-	    ./modules/nixos/nvidia.nix
-            ./modules/nixos/hardening.nix
-            ./modules/nixos/tlp.nix
-	    ./modules/nixos/syncthing.nix
+            ./modules/nixos/apps/flatpak.nix
+	    ./modules/nixos/apps/syncthing.nix
+	    ./modules/nixos/system/nvidia.nix
+            ./modules/nixos/system/hardening.nix
+            ./modules/nixos/system/tlp.nix
             inputs.nix-flatpak.nixosModules.nix-flatpak
 	    inputs.home-manager.nixosModules.default
           ];

@@ -11,7 +11,6 @@
      packages = [
        "io.gitlab.librewolf-community"
        "org.onlyoffice.desktopeditors"
-       "io.github.spacingbat3.webcord"
        "com.spotify.Client"
        "md.obsidian.Obsidian"
        "io.github.celluloid_player.Celluloid"
@@ -30,11 +29,10 @@
        "hu.kramo.Cartridges"
        "com.github.tchx84.Flatseal"
        "com.vysp3r.ProtonPlus"
-       "org.upscayl.Upscayl"
        "org.gnome.Boxes"
        "com.pokemmo.PokeMMO"
      ];
-     overrides = {
+    overrides = {
         
 	global = {
            Context.sockets = ["wayland" "!x11" "!fallback-x11"];
@@ -54,12 +52,12 @@
 	};
 
         "org.onlyoffice.desktopeditors".Context.sockets = ["x11"];          "com.spotify.Client".Context.sockets = ["x11"];
-	"com.valvesoftware.Steam".Context.sockets = ["x11"];
+     	"com.valvesoftware.Steam".Context.sockets = ["x11"];
         "net.lutris.Lutris".Context.sockets = ["x11"];
-	"org.prismlauncher.PrismLauncher".Context.sockets = ["x11"];
-	"com.heroicgameslauncher.hgl".Context.sockets = ["x11"];
-	"com.usebottles.bottles".Context.sockets = ["x11"];        
-     };
+    	"org.prismlauncher.PrismLauncher".Context.sockets = ["x11"];
+    	"com.heroicgameslauncher.hgl".Context.sockets = ["x11"];
+    	"com.usebottles.bottles".Context.sockets = ["x11"];        
+    };
  };
 
 }

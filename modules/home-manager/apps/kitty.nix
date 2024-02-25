@@ -12,11 +12,6 @@
        tab_title_template          {title}{' :{}:'.format(num_windows) if num_windows > 1 else ""}
        background_opacity 0.9
       '';
-
-
    };
-
-
-
 
 }

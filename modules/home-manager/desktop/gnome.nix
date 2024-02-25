@@ -22,7 +22,7 @@ dconf.settings = {
 	 "org.inkscape.Inkscape.desktop"
 	 "org.gimp.GIMP.desktop"
 	 "com.spotify.Client.desktop"
-	 "io.github.spacingbat3.webcord.desktop"
+	 "webcord.desktop"
 	 "com.valvesoftware.Steam.desktop"
 	 "org.onlyoffice.desktopeditors.desktop"
 	 "net.lutris.Lutris.desktop"
@@ -69,6 +69,11 @@ dconf.settings = {
 
     "org/gnome/desktop/background" = {
       picture-uri-dark = wallpaper;
+    };
+
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = ["qemu:///system"];
+      uris = ["qemu:///system"];
     };
 
 };

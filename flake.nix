@@ -67,7 +67,6 @@
 	      electron_28
 	      # Java
 	      openjdk19
-	      jetbrains.idea-community
            ];
            
            shellHook = ''
@@ -80,7 +79,6 @@
       devShells.x86_64-linux.android = pkgs.mkShell {
 	   nativeBuildInputs = with pkgs; [
 	      android-tools
-	      android-studio
 	      scrcpy
 	      kotlin
            ];

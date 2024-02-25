@@ -117,11 +117,9 @@
   users.users.theloremaster = {
     isNormalUser = true;
     description = "Loremaster";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
     shell = pkgs.zsh;
-    packages = with pkgs; [
-    squashfsTools
-    ];
+    packages = with pkgs; [];
   };
 
   # Enables Home-Manager for the "theloremaster" user
@@ -153,6 +151,9 @@
 
   # Disables the firewall altogether.
   networking.firewall.enable = false;
+
+  # Enables Virt-Manager
+  programs.virt-manager.enable = true;
 
   # Enables NextDNS
   services.resolved = {

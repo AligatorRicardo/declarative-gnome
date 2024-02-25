@@ -12,4 +12,6 @@
      };
   };
 
+  home.packages = [ pkgs.gh ];
+
 }

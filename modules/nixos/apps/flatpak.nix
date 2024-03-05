@@ -30,7 +30,6 @@
        "com.github.tchx84.Flatseal"
        "com.vysp3r.ProtonPlus"
        "org.gnome.Boxes"
-       "com.pokemmo.PokeMMO"
      ];
     overrides = {
         
@@ -39,19 +38,20 @@
 	   
 
 	   Environment = {
-	   GTK_THEME = "Catppuccin-Mocha-Standard-Mauve-Dark";
-	   ICON_THEME = "Tela-purple-dark";
+	     GTK_THEME = "Catppuccin-Mocha-Standard-Mauve-Dark";
+	     ICON_THEME = "Tela-purple-dark";
+	     "OBSIDIAN_USE_WAYLAND" = "1";
            };
 
 	   Context.filesystems = [
-           "/home/theloremaster/.themes"
-	   "/home/theloremaster/.icons"
-	   "/home/theloremaster/GamingSpace/Pokémon\ Essentials/"
+            "/home/theloremaster/.themes"
+	    "/home/theloremaster/.icons"
+	    "/home/theloremaster/GamingSpace/Pokémon\ Essentials/"
 	   ];
 
 	};
 
-        "org.onlyoffice.desktopeditors".Context.sockets = ["x11"];          "com.spotify.Client".Context.sockets = ["x11"];
+        "org.onlyoffice.desktopeditors".Context.sockets = ["x11"];        "com.spotify.Client".Context.sockets = ["x11"];
      	"com.valvesoftware.Steam".Context.sockets = ["x11"];
         "net.lutris.Lutris".Context.sockets = ["x11"];
     	"org.prismlauncher.PrismLauncher".Context.sockets = ["x11"];

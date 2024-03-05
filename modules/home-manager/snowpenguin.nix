@@ -9,9 +9,11 @@
      ./apps/neovim.nix
      ./apps/lf.nix
      ./apps/kitty.nix
-     # Shell and it's configuration
+     # Shell and their configuration
      ./shell/zsh.nix
      ./shell/git.nix
+     # Libraries and their configurations
+     ./libraries/androidjava.nix 
   ];
 
 }

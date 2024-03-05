@@ -3,7 +3,13 @@
   specialisation = {
        fora-de-casa.configuration = {   
            system.nixos.tags = [ "fora-de-casa" ];
-           services.auto-cpufreq.enable = true;
+           
+	   services.tlp = {
+	       enable = true;
+	   };
+
+           services.power-profiles-daemon.enable = false;
+
 	   boot.extraModprobeConfig = ''
              blacklist nouveau
              options nouveau modeset=0

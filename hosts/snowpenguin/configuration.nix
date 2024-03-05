@@ -10,14 +10,14 @@
        inputs.home-manager.nixosModules.default
     ];
 
-  # Bootloader and Plymouth.
+  # Bootloader and SystemD
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.systemd.enable = true;
+  #boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
 
-  boot.initrd.luks.devices."luks-1bfe9204-0193-48e4-ae5a-6da1fef06f52".device = "/dev/disk/by-uuid/1bfe9204-0193-48e4-ae5a-6da1fef06f52"; # Encrypts my hardrive
   networking.hostName = "snowpenguin"; # Define your hostname.
+  boot.initrd.luks.devices."luks-c070d447-cd72-4a41-8c99-88d45934c8ec".device = "/dev/disk/by-uuid/c070d447-cd72-4a41-8c99-88d45934c8ec"; # Encrypts my harddrive, THIS WILL CHANGE ON FUTURE INSTALLATIONS
 
   # Enable networking
   networking.networkmanager = {

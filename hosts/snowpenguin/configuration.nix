@@ -17,7 +17,7 @@
   boot.plymouth.enable = true;
 
   networking.hostName = "snowpenguin"; # Define your hostname.
-  boot.initrd.luks.devices."luks-c070d447-cd72-4a41-8c99-88d45934c8ec".device = "/dev/disk/by-uuid/c070d447-cd72-4a41-8c99-88d45934c8ec"; # Encrypts my harddrive, THIS WILL CHANGE ON FUTURE INSTALLATIONS
+  boot.initrd.luks.devices."luks-250ac524-4957-4756-80a9-fb3d593497af".device = "/dev/disk/by-uuid/250ac524-4957-4756-80a9-fb3d593497af"; # Encrypts my harddrive, THIS WILL CHANGE ON FUTURE INSTALLATIONS
 
   # Enable networking
   networking.networkmanager = {

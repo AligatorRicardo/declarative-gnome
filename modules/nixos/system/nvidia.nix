@@ -1,11 +1,6 @@
 { config, lib, pkgs, ... }:
 {
 
-  virtualisation.podman = {
-    enableNvidia = true;
-    enable = true;
-  };
-
   # Enable OpenGL
   hardware.opengl = {
     enable = true;
@@ -16,20 +11,17 @@
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"];
   hardware.nvidia = {
-
+    open = false; # Disabled to allow use of the (better) proprietary drivers.
+ 
     # Modesetting is required.
     modesetting.enable = true;
 
     # Nvidia power management
     powerManagement.enable = true;
     powerManagement.finegrained = true;
-    open = false;
 
-    # Enable the Nvidia settings menu accessible via `nvidia-settings`.
-    nvidiaSettings = true;
-
-      # Optionally, you may need to select the appropriate driver version for your specific GPU.
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
+    # Enable the Nvidia Stable branch.
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
     hardware.nvidia.prime = {

@@ -2,90 +2,47 @@
   description = "Nixos config flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/release-23.11";
+    nixpkgs.url = "github:nixos/nixpkgs/release-24.05";
 
     home-manager = {
-       url = "github:nix-community/home-manager/release-23.11";
+       url = "github:nix-community/home-manager/release-24.05";
        inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/main";
 
-    nixvim = {
-      url = "github:nix-community/nixvim/nixos-23.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
 
-    catppuccinifier = {
-       url = "github:lighttigerXIV/catppuccinifier";
-       inputs.nixpkgs.follows = "nixpkgs";
+    nixvim = {
+      url = "github:nix-community/nixvim/nixos-24.05";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
   };
 
-  outputs = { self, nixpkgs, catppuccinifier, ... }@ inputs:
+  outputs = inputs @{ nixpkgs, self, ... }:
     let
       system = "x86_64-linux";
-      #pkgs = nixpkgs.legacyPackages.${system};
       pkgs = import nixpkgs { system = "x86_64-linux"; config.allowUnfree = true; };
     in
     {
-      # Configuration for the Snowpenguin setup
-      homeManagerModules.snowpenguin = ./modules/home-manager/snowpenguin.nix; 
-      nixosConfigurations.snowpenguin = nixpkgs.lib.nixosSystem {
-          specialArgs = {inherit inputs catppuccinifier;};
+      # Configuration for the Antioch setup
+      homeManagerModules.antioch = ./modules/home-manager/antioch.nix; 
+      nixosConfigurations.antioch = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+	    inherit system; 
+	    inherit inputs;
+          };
           modules = [ 
-            ./hosts/snowpenguin/configuration.nix
-            ./hosts/snowpenguin/hardware-configuration.nix
+	    {nixpkgs.overlays = [inputs.hyprpanel.overlay];}
+            ./hosts/antioch/configuration.nix
+            ./hosts/antioch/hardware-configuration.nix
             ./modules/nixos/apps/flatpak.nix
-	    ./modules/nixos/apps/syncthing.nix
 	    ./modules/nixos/system/nvidia.nix
-            ./modules/nixos/system/hardening.nix
-            ./modules/nixos/system/tlp.nix
+	    ./modules/nixos/apps/steam.nix
             inputs.nix-flatpak.nixosModules.nix-flatpak
 	    inputs.home-manager.nixosModules.default
           ];
-        };
-
-      # Rust devshell
-      devShells.x86_64-linux.rust = pkgs.mkShell {
-	   nativeBuildInputs = with pkgs; [
-              rustc
-	      rustup
-           ];
-
-	   shellHook = ''
-              echo "Welcome to the Rust Devshell"
-           '';
       };
-
-      # Fullstack devshell
-      devShells.x86_64-linux.fullstack = pkgs.mkShell {
-	   nativeBuildInputs = with pkgs; [
-              # Node + Javascript
-	      nodejs
-	      electron_28
-	      # Java
-	      openjdk19
-           ];
-           
-           shellHook = ''
-              echo "Welcome to the Fullstack Devshell"
-           '';
-      };
-
-
-      # Android devshell
-      devShells.x86_64-linux.android = pkgs.mkShell {
-	   nativeBuildInputs = with pkgs; [
-	      android-tools
-	      scrcpy
-	      kotlin
-           ];
-           
-	   shellHook = ''
-               echo "Welcome to the Android Devshell"
-           '';
-      };
-};
+     };
 }

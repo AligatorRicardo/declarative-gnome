@@ -6,10 +6,8 @@
  programs.nixvim = {
     enable = true;
 
-     colorschemes.catppuccin = {
+     colorschemes.gruvbox = {
        enable = true;
-       flavour = "mocha";
-       transparentBackground = true;
      };
      plugins = {
        bufferline.enable = true;

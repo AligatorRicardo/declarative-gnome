@@ -2,7 +2,7 @@
 
    programs.kitty = {
       enable = true;
-      theme = "Catppuccin-Mocha";
+      theme = "Gruvbox Dark";
       shellIntegration.enableZshIntegration = true;
       extraConfig = ''
        tab_bar_min_tabs            1

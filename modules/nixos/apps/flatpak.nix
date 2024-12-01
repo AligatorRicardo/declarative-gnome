@@ -25,6 +25,8 @@
        "hu.kramo.Cartridges"
        "org.upscayl.Upscayl"
        "com.vysp3r.ProtonPlus"
+       "org.ryujinx.Ryujinx"
+       "org.libretro.RetroArch"
        "org.gnome.Boxes"
      ];
     overrides = { };

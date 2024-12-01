@@ -2,6 +2,7 @@
 
 { config, pkgs, system, inputs, stdenv, ... }:
 
+ # Not working as of 24.11, waiting for a commit to update it.
  let acermodule = config.boot.kernelPackages.callPackage ./acer-rgb.nix {}; in
 
 {
@@ -13,15 +14,22 @@
   # Bootloader and SystemD
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
   networking.hostName = "antioch"; # Define your hostname.
   boot.initrd.luks.devices."luks-bfaa491e-daa1-48ce-922d-a71fa80bfb25".device = "/dev/disk/by-uuid/bfaa491e-daa1-48ce-922d-a71fa80bfb25"; # Encrypts my device. WARNING: COPY THIS VALUE FROM THE STOCK FILE BEFORE REBUILDING, IT MIGHT BREAK LUKS IF YOU DONT 
+
+  # Enable OpenGL
+  hardware.opengl = {
+     enable = true;
+  };
 
   # Enable networking
   networking.networkmanager.enable = true;
 
   # Enable Flakes
   nix.settings.experimental-features = [ "flakes" "nix-command" ];
+
+  # Test
+  #boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Set your time zone.
   time.timeZone = "America/Fortaleza";
@@ -30,9 +38,10 @@
   #hardware.enableAllFirmware = true;
 
   # Enables my Acer RGB Keyboard to work properly, and removes boot logs.
-  boot.extraModulePackages = [ acermodule ];
+  boot.extraModulePackages = [ acermodule ]; # Not working as of 24.11, waiting for an update.
   boot.kernelModules = [ "facer" "wmi" "sparse-keymap" "video" ];
-  boot.kernelParams = [ "quiet" "udev.log_level=3" "acpi_backlight=video" "acpi_osi=Linux" "nvidia.NVreg_PreserveVideoMemoryAllocations=1" "nvidia.NVreg_EnableGpuFirmware=0" "nvidia-drm.modeset=1" "nvidia-drm.fbdev=1" ];
+  # Legacy code, moved to nvidia.nix.
+  #boot.kernelParams = [ "quiet" "udev.log_level=3" "acpi_backlight=video" "acpi_osi=Linux" ];
 
   # Select internationalisation properties.
   i18n.defaultLocale = "pt_BR.UTF-8";
@@ -64,6 +73,9 @@
 
   # Enables Hyprland WM
   programs.hyprland.enable = true;
+  
+  # Enables GNOME Keyring
+  services.gnome.gnome-keyring.enable = true;
 
   # Enables XDG GTK Portals 
   xdg.portal = { 
@@ -75,6 +87,8 @@
   services.gvfs.enable = true;
   services.power-profiles-daemon.enable = true;
   services.upower.enable = true; 
+  programs.dconf.enable = true;
+  
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -105,9 +119,9 @@
   users.users.theloremaster = {
     isNormalUser = true;
     description = "Loremaster";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" "qemu-libvirtd" "disk" ];
     shell = pkgs.zsh;
-    packages = with pkgs; [ ];
+    packages = with pkgs; [ pkgs.virtiofsd ];
   };
 
   # Enables Home-Manager for the "theloremaster" user
@@ -139,6 +153,7 @@
   # 
   environment.systemPackages = with pkgs; [
       libsForQt5.qt5.qtquickcontrols2
+      virt-manager
       libsForQt5.qt5.qtgraphicaleffects
   ];
 

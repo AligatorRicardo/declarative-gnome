@@ -1,11 +1,11 @@
 { pkgs }:
 
 let
-  imgLink = "https://YOURIMAGELINK/image.png";
+  imgLink = "https://github.com/yhanruzai/snowpenguin/blob/snowpenguin/modules/home-manager/desktop/wallpapers/Background.jpg";
 
   image = pkgs.fetchurl {
     url = imgLink;
-    sha256 = "sha256-HrcYriKliK2QN02/2vFK/osFjTT1NamhGKik3tozGU0=";
+    sha256 = "sha256-+1fYPw3VPkwtz4U8GRHFcG6s+EpYmFMYNfweoMdgWLQ=";
   };
 in
 pkgs.stdenv.mkDerivation {
@@ -19,5 +19,8 @@ pkgs.stdenv.mkDerivation {
   installPhase = ''
     mkdir -p $out
     cp -R ./* $out/
+    cd $out/
+    rm Background.jpg
+    cp -r ${image} $out/Background.jpg
    '';
 }

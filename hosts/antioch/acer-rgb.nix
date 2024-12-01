@@ -1,13 +1,13 @@
 { stdenv, lib, fetchFromGitHub, kernel, kmod }:
 stdenv.mkDerivation rec {
-  name = " acer-predator-turbo-and-rgb-keyboard-linux-module-${version}-${kernel.modDirVersion}";
+  name = "acer-predator-turbo-and-rgb-keyboard-linux-module-${version}-${kernel.modDirVersion}";
   version = "main";
 
   src = fetchFromGitHub {
-    owner = "JafarAkhondali";
+    owner = "HollowMan6";
     repo = "acer-predator-turbo-and-rgb-keyboard-linux-module";
     rev = "${version}";
-    sha256 = "sha256-ZX36l58g9yVa7M8X98a7zvP8tvfWYwudXk2F6C+PiAE=";
+    sha256 = "sha256-aK63tsTWLSL4amTooQZFVgfNaOlsm48Y+1Akcqn5+gA=";
   };
 
    setSourceRoot = ''
@@ -26,7 +26,7 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     description = "Improved Linux driver for Acer RGB Keyboards ";
-    homepage = "https://github.com/JafarAkhondali/acer-predator-turbo-and-rgb-keyboard-linux-module";
+    homepage = "https://github.com/HollowMan6/acer-predator-turbo-and-rgb-keyboard-linux-module";
     license = licenses.gpl3;
     maintainers = [ ];
     platforms = platforms.linux;

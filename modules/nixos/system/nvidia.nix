@@ -1,12 +1,10 @@
 { config, lib, pkgs, ... }:
 {
 
-  # Enable OpenGL
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-  };
+  # Kernel Parameters for the NVIDIA Setup
+  boot.kernelParams = [ "quiet" "udev.log_level=3" "acpi_backlight=video" "acpi_osi=Linux" "nvidia.NVreg_PreserveVideoMemoryAllocations=1" "nvidia.NVreg_EnableGpuFirmware=0" "nvidia-drm.modeset=1" "nvidia-drm.fbdev=1" ];
+
+  #nixpkgs.config.allowBroken = true; 
 
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"];

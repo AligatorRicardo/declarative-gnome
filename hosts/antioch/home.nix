@@ -19,7 +19,11 @@
   home.packages = [
      pkgs.hyprpanel
      pkgs.hyprpicker
-     pkgs.gnome.nautilus
+     pkgs.xfce.thunar
+     pkgs.xfce.thunar-volman
+     pkgs.xfce.thunar-archive-plugin
+     pkgs.xarchiver
+     pkgs.gnome.file-roller
      pkgs.libnotify
      pkgs.libgtop
      pkgs.onlyoffice-bin
@@ -27,11 +31,20 @@
      pkgs.xdg-user-dirs
      pkgs.hyprlock
      pkgs.hypridle
-
+     pkgs.snapshot
+     pkgs.p7zip
+     pkgs.unrar
   ];
 
    # This is the primary way to manage plain files with the through 'home.file'.
    home.file = { 
+   };
+
+   dconf.settings = {
+     "org/virt-manager/virt-manager/connections" = {
+      autoconnect = ["qemu:///system"];
+      uris = ["qemu:///system"];
+     };
    };
 
    # Home Manager can also manage your environment variables through'home.sessionVariables'.

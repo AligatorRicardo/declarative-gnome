@@ -27,12 +27,12 @@ settings = {
         vibrancy="0.1696";
        };
        active_opacity="1.0";
-       "col.shadow"="rgba(1a1a1aee)";
-       drop_shadow=true;
+       #"col.shadow"="rgba(1a1a1aee)";
+       #drop_shadow=true;
        inactive_opacity="1.0";
        rounding=10;
-       shadow_range=4;
-       shadow_render_power=3;
+       #shadow_range=4;
+       #shadow_render_power=3;
     };
 
     dwindle = {
@@ -80,10 +80,19 @@ settings = {
 env = [
 "XCURSOR_SIZE,24"
 "HYPRCURSOR_SIZE,24"
+"AQ_DRM_DEVICES,/dev/dri/card74:/dev/dri/card1"
 ];
 monitor=",preferred,auto,1.25";
 
-windowrulev2="suppressevent maximize, class:.*";
+windowrulev2= [
+"suppressevent maximize, class:.*"
+"fullscreen,class:^steam_app\d+$"
+"workspace 10,class:^steam_app_\d+$"
+"stayfocused, title:^()$,class:^(steam)$"
+"minsize 1 1, title:^()$,class:^(steam)$"
+];
+
+workspace = "10, border:false, rounding:false";
 
 bind=[
 "$mod, RETURN, exec, $terminal"
